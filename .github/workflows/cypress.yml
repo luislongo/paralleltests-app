@@ -30,9 +30,11 @@ jobs:
   cypress-tests:
     runs-on: ubuntu-latest
     needs: setup-build
+    env:
+      suites: ${{ needs.setup-build.outputs.suites }}
     strategy:
       matrix:
-        suites: ${{ needs.setup-build.outputs.suites }}
+        suites: ${{ fromJson(needs.setup-build.outputs.suites) }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
