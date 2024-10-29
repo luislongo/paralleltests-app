@@ -21,15 +21,9 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.pull_request.head.sha }}/dist
+          name: ${{ github.event.pull_request.head.sha }}
           retention-days: 1
           path: dist
-      - name: Upload suites
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ github.event.pull_request.head.sha }}/cypress
-          retention-days: 1
-          path: ./cypress.suites.json
       - name: Get suites
         id: suites
         run: echo "::set-output name=suites::$(cat cypress.suites.json)"
