@@ -23,9 +23,9 @@ jobs:
           retention-days: 1
           path: dist
       - name: Read cypress.suites.json file and set output
-        run: echo "::set-output name=suites::$(cat cypress.suites.json)"
+        run: echo "suites=$(cat cypress.suites.json)" >> $GITHUB_ENV
       - name: Echo output
-        run: echo ${{ steps.setup-build.outputs.suites }}
+        run: echo $suites
 
   cypress-tests:
     runs-on: ubuntu-latest
