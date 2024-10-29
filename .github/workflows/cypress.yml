@@ -27,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: setup-build
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Install serve
         run: npm install -g serve
       - name: Download artifacts
@@ -40,3 +42,7 @@ jobs:
         run: |
           sudo apt-get update; sudo apt-get install -y curl
           curl http://localhost:3000
+      - name: Install cypress
+        run: npm install -g cypress
+      - name: Run cypress tests
+        run: cypress run --config baseUrl=http://localhost:3000
