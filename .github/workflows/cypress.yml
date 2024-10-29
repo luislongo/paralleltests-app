@@ -35,7 +35,7 @@ jobs:
           name: ${{ github.event.pull_request.head.sha }}
           path: builds/${{ github.event.pull_request.head.sha }}
       - name: Serve
-        run: serve -s build > /dev/null 2>&1 &
+        run: serve -s dist > /dev/null 2>&1 &
       - name: Echo app
         run: |
           sudo apt-get update; sudo apt-get install -y curl
