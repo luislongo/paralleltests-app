@@ -71,8 +71,6 @@ jobs:
       matrix:
         suites: ${{ fromJson(needs.checkout-tests-repo.outputs.suites) }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
       - name: Install serve
         run: npm install -g serve
       - name: Download dist artifact
@@ -84,7 +82,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: ${{ github.event.pull_request.head.sha }}-tests
-          path: "cypress"
+          path: "."
       - name: Serve
         run: serve -s dist > /dev/null 2>&1 &
       - name: Install cypress
@@ -96,7 +94,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: cypress-tests
     steps:
-      - name: Delete artifacts
+      - name: Delete dist artifact
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: ${{ github.event.pull_request.head.sha }}
+          name: ${{ github.event.pull_request.head.sha }}-dist
+      - name: Delete tests artifact
+        uses: geekyeggo/delete-artifact@v5
+        with:
+          name: ${{ github.event.pull_request.head.sha }}-tests
