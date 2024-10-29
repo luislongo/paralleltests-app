@@ -32,7 +32,7 @@ jobs:
     needs: setup-build
     strategy:
       matrix:
-        suites: ["1-getting-started", "2-advanced-examples"]
+        suites: [$suites]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
