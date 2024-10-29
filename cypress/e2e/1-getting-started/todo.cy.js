@@ -2,7 +2,7 @@
 
 describe("example to-do app", () => {
   beforeEach(() => {
-    cy.visit("https://localhost:3000");
+    cy.visit("http://localhost:3000");
   });
 
   it("displays react logo", () => {
