@@ -32,7 +32,7 @@ jobs:
     needs: setup-build
     steps:
       - name: Print suites
-        run: echo ${{ toJson(github) }}
+        run: echo ${{ toJson(env) }}
 
   cypress-tests:
     runs-on: ubuntu-latest
