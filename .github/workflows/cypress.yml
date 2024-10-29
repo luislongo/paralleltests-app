@@ -27,14 +27,19 @@ jobs:
       - name: Echo output
         run: echo $suites
 
+  print-suites:
+    runs-on: ubuntu-latest
+    needs: setup-build
+    steps:
+      - name: Print suites
+        run: echo ${{ needs.setup-build.outputs.suites }}
+
   cypress-tests:
     runs-on: ubuntu-latest
     needs: setup-build
-    env:
-      suites: ${{ needs.setup-build.outputs.suites }}
     strategy:
       matrix:
-        suites: ${{ fromJson(needs.setup-build.outputs.suites) }}
+        suites: ["login", "register"]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
