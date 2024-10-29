@@ -97,7 +97,7 @@ jobs:
       - name: Delete dist artifact
         uses: geekyeggo/delete-artifact@v5
         with:
-          name: ${{ github.event.pull_request.head.sha }}-dist
+          name: ${{ github.event.pull_request.head.sha }}-build
       - name: Delete tests artifact
         uses: geekyeggo/delete-artifact@v5
         with:
