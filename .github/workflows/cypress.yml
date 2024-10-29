@@ -33,6 +33,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: build
+          path: builds/${{ github.event.pull_request.head.sha }}/build
       - name: Serve
         run: serve -s build > /dev/null 2>&1 &
       - name: Echo app
