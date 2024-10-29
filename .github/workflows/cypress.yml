@@ -21,4 +21,6 @@ jobs:
       - name: Serve
         run: serve -s build > /dev/null 2>&1 &
       - name: Echo app
-        run: apt-get install -y curl && curl http://localhost:3000
+        run: |
+          apt-get update; apt-get install -y curl
+          curl http://localhost:3000
