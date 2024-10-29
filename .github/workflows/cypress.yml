@@ -32,7 +32,7 @@ jobs:
     needs: setup-build
     strategy:
       matrix:
-        suites: [${{ needs.setup-build.outputs.suites }}]
+        suites: ${{ needs.setup-build.outputs.suites }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
