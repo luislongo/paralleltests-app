@@ -6,6 +6,6 @@ describe("example to-do app", () => {
   });
 
   it("displays react logo", () => {
-    cy.get(".App-logo").should("be.visible");
+    cy.get(".logo.react").should("be.visible");
   });
 });

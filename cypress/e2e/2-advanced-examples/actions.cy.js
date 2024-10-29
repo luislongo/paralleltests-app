@@ -6,6 +6,6 @@ context("Actions", () => {
   });
 
   it("displays react logo", () => {
-    cy.get(".App-logo").should("be.visible");
+    cy.get(".logo").should("be.visible");
   });
 });
