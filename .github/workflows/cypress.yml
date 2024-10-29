@@ -43,6 +43,6 @@ jobs:
           sudo apt-get update; sudo apt-get install -y curl
           curl http://localhost:3000
       - name: Install cypress
-        run: npm install -g cypress
+        run: npm install --save-dev cypress
       - name: Run cypress tests
-        run: cypress run --config baseUrl=http://localhost:3000
+        run: npx cypress run --config baseUrl=http://localhost:3000
