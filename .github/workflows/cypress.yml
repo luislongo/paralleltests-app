@@ -59,6 +59,7 @@ jobs:
         with:
           name: ${{ github.event.pull_request.head.sha }}-tests
           retention-days: 1
+          path: "."
       - name: Get suites
         id: suites
         run: echo "::set-output name=suites::$(cat cypress.suites.json)"
