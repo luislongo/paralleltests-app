@@ -28,19 +28,12 @@ jobs:
         id: suites
         run: echo "::set-output name=suites::$(cat cypress.suites.json)"
 
-  echo-suite:
-    runs-on: ubuntu-latest
-    needs: setup-build
-    steps:
-      - name: Echo suites
-        run: echo ${{ needs.setup-build.outputs.suites }}
-
   cypress-tests:
     runs-on: ubuntu-latest
     needs: setup-build
     strategy:
       matrix:
-        suites: ["login", "register"]
+        suites: ${{ needs.setup-build.outputs.suites }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
