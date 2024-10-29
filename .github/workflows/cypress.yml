@@ -3,7 +3,7 @@ name: QA Tests
 on: pull_request
 
 jobs:
-  cypress-run:
+  setup-build:
     runs-on: ubuntu-latest
     steps:
       - name: Setup node
@@ -18,6 +18,19 @@ jobs:
         run: npm install -g serve
       - name: Build
         run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+
+  cypress-tests:
+    runs-on: ubuntu-latest
+    needs: setup-build
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build
       - name: Serve
         run: serve -s build > /dev/null 2>&1 &
       - name: Echo app
