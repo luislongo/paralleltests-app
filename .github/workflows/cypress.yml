@@ -19,6 +19,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Serve
-        run: serve -s build
+        run: serve -s build > /dev/null 2>&1 &
       - name: Echo app
         run: apt-get install -y curl && curl http://localhost:5173
