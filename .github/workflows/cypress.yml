@@ -5,6 +5,8 @@ on: pull_request
 jobs:
   setup-build:
     runs-on: ubuntu-latest
+    outputs:
+      suites: ${{ steps.suites.outputs.suites }}
     steps:
       - name: Setup node
         uses: actions/setup-node@v2
@@ -19,20 +21,25 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.pull_request.head.sha }}
+          name: ${{ github.event.pull_request.head.sha }}/dist
           retention-days: 1
           path: dist
-      - name: Read cypress.suites.json file and set output
-        run: echo "suites=$(cat cypress.suites.json)" >> $GITHUB_ENV
-      - name: Echo output
-        run: echo $suites
+      - name: Upload suites
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ github.event.pull_request.head.sha }}/cypress
+          retention-days: 1
+          path: ./cypress.suites.json
+      - name: Get suites
+        id: suites
+        run: echo "::set-output name=suites::$(cat cypress.suites.json)"
 
-  print-suites:
+  echo-suite:
     runs-on: ubuntu-latest
     needs: setup-build
     steps:
-      - name: Print suites
-        run: echo ${{ toJson(env) }}
+      - name: Echo suites
+        run: echo ${{ needs.setup-build.outputs.suites }}
 
   cypress-tests:
     runs-on: ubuntu-latest
