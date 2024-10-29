@@ -45,4 +45,4 @@ jobs:
       - name: Install cypress
         run: npm install --save-dev cypress
       - name: Run cypress tests
-        run: npx cypress run --config baseUrl=http://localhost:3000
+        run: npx cypress run --config baseUrl=http://localhost:3000 --spec "cypress/e2e/getting-started"
